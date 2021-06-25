@@ -1,0 +1,38 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: PROVA-API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: PROVA-SERVICE
+          uri: lb://PROVA-SERVICE
+          predicates:
+            - Path=/api/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: PROVA-SERVICE
+#                fallbackuri: forward:/provaServiceFallback
+
+#resilience4j.circuitbreaker:
+#  instances:
+#    customerService:
+#      failureRateThreshold: 50
+#      ringBufferSizeInClosedState: 5
+#      ringBufferSizeInHalfOpenState: 3
+#      waitDurationInOpenState: 20s
+#      automaticTransitionFromOpenToHalfOpenEnabled: true
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+  serviceUrl:
+    defaultZone: http://localhost:8761
+
